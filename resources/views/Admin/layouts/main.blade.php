@@ -42,5 +42,6 @@
 </div>
 <!-- ./wrapper -->
 @include('Admin.layouts.script')
+@yield('js')
 </body>
 </html>

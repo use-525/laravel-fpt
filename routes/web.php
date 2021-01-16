@@ -30,4 +30,8 @@ use Inertia\Inertia;
 
 Route::get('/admin', function () {
     return view('Admin.index');
-});
+})->name('Admin.index');
+Route::get('/admin/category', function () {
+    return view('Admin.category.index');
+})->name('Admin.category');;
+
