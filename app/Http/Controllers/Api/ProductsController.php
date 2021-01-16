@@ -95,7 +95,7 @@ class ProductsController extends Controller
         //
         $model = Products::find($id);
         if($model){
-        Product_galleries::where('prd_id',$id)->delete();
+        Product_galleries::where('product_id',$id)->delete();
         Products::destroy($id);
         }
         return $model;
