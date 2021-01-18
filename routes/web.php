@@ -33,5 +33,8 @@ Route::get('/admin', function () {
 })->name('Admin.index');
 Route::get('/admin/category', function () {
     return view('Admin.category.index');
-})->name('Admin.category');;
+})->name('Admin.category');
+Route::get('/admin/product', function () {
+    return view('Admin.product.index');
+})->name('Admin.product');
 
