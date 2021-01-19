@@ -18,6 +18,10 @@
     <input type="file" class="form-control-file" id="add-image" name="image">
   </div>
    <div class="form-group">
+    <label for="">Image Detail</label>
+    <input type="file" class="form-control-file" id="add-imageUrl" name="image_url" multiple="multiple">
+  </div>
+   <div class="form-group">
     <label for="">Danh muc</label>
     <select id="add-cate" class="form-control"  name="cate_id">
     </select>
