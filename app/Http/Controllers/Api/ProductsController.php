@@ -33,13 +33,13 @@ class ProductsController extends Controller
         //
         $model = new Products;
         $model->fill($request->all())->save();
-        return $model;
-        foreach ($request->img_url as $img_url) {
+        foreach ($request->img_url as $url) {
 			Product_galleries::create([
-			'prd_id' => $model->id,
-			'img_url' => $img_url
+			'product_id' => $model->id,
+			'img_url' => $url
 		]);
-		}
+        }
+        return $model;
     }
 
     /**
@@ -55,7 +55,7 @@ class ProductsController extends Controller
         $cate_id = $prd->cate_id;
         $cate = Category::find($cate_id);
         $prd_gallery = Product_galleries::where('product_id',$id)->get();
-         return  $result = [
+        return  $result = [
         'cate' => $cate,
         'prd' => $prd,
         'prd_gallery'=>$prd_gallery

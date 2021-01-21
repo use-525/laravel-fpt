@@ -61,6 +61,7 @@ $('#form-add').validate({
                     </tr>`
                 $('#list-cate').append(result);
                 $('#add-cate').modal('hide');
+                $('#form-add')[0].reset();
             },
             error: function(jqXHR, textStatus, errorThrown) {}
         })
@@ -77,7 +78,6 @@ function editCate(id) {
             $('#edit-cate_name').val(response.cate_name)
             $('#edit-desc').val(response.desc)
             $('#edit-show_menu').val(response.show_menu)
-
         },
         error: function(jqXHR, textStatus, errorThrown) {}
     })

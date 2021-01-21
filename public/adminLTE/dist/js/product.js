@@ -16,7 +16,7 @@ window.onload = () => {
                         <td id="star-${prd.id}">${prd.star} </td>
                         <td id="views-${prd.id}">${prd.views}</td>
                        <td><button type="button"  data-toggle="modal" data-target="#show-prd"  onclick="showPrd(${prd.id})" class="btn btn-info">Show</button></td>
-                        <td><button type="button"  data-toggle="modal" data-target="#edit-prd"  onclick="editprd(${prd.id})" class="btn btn-warning">EDIT</button></td>
+                        <td><button type="button"  data-toggle="modal" data-target="#edit-prd"  onclick="editPrd(${prd.id})" class="btn btn-warning">EDIT</button></td>
                         <td><button type="button"  data-id="${prd.id}"  onclick="deletePrd(this)" class="btn btn-danger">DELETE</button></td>
                          <td><button type="button"    onclick="showAnhPrd(${prd.id})" class="btn btn-info">Anh</button></td>
                     </tr>`;
@@ -91,7 +91,7 @@ $('#form-add').validate({
     },
     submitHandler: function(callback) {
         let image_url = document.querySelector('#add-imageUrl').files;
-        const img_url = []
+        const img_url = [];
         for (let i = 0; i < image_url.length; i++) {
             let storageUpload = firebase.storage().ref(`product_detail/${image_url[i].name}`);
             storageUpload.put(image_url).then(function() {
@@ -109,6 +109,7 @@ function addPrd(callback) {
     let storageRef = firebase.storage().ref(`product/${image.name}`);
     storageRef.put(image).then(function() {
         storageRef.getDownloadURL().then((image) => {
+
             $.ajax({
                 type: 'post',
                 url: API_PRODUCT,
@@ -124,23 +125,22 @@ function addPrd(callback) {
                     img_url: callback
                 },
                 success: function(response) {
-
                     const result = ` << role="row" class="odd">
-                    <td class="dtr-control" tabindex="0">${response.id}</td>
-                    <td id="prd_name-${response.id}" class="sorting_1">${response.name}</td>
-                    <td id="image-${response.id}"><img src="${response.image}" alt="" class="img-thumbnail" width="200" height="200"></td>
-                    <td id="cate_id-${response.cate_id}">${oneCate(response.cate_id)}</td>
-                    <td id="price-${response.id}" >${response.price}</td>
-
-                    <td id="star-${response.id}">${response.star} </td>
-                    <td id="views-${response.id}">${response.views}</td>
-                   <td><button type="button"  data-toggle="modal" data-target="#show-prd"  onclick="showPrd(${response.id})" class="btn btn-info">Show</button></td>
-                    <td><button type="button"  data-toggle="modal" data-target="#edit-prd"  onclick="editprd(${response.id})" class="btn btn-warning">EDIT</button></td>
-                    <td><button type="button"  data-id="${response.id}"  onclick="deletePrd(this)" class="btn btn-danger">DELETE</button></td>
-                     <td><button type="button"    onclick="showAnhPrd(${response.id})" class="btn btn-info">Anh</button></td>
-                </>`
+                        <td class="dtr-control" tabindex="0">${response.id}</td>
+                        <td id="prd_name-${response.id}" class="sorting_1">${response.name}</td>
+                        <td id="image-${response.id}"><img src="${response.image}" alt="" class="img-thumbnail" width="200" height="200"></td>
+                        <td id="cate_id-${response.cate_id}">${oneCate(response.cate_id)}</td>
+                        <td id="price-${response.id}" >${response.price}</td>
+                        <td id="star-${response.id}">${response.star} </td>
+                        <td id="views-${response.id}">${response.views}</td>
+                        <td><button type="button"  data-toggle="modal" data-target="#show-prd"  onclick="showPrd(${response.id})" class="btn btn-info">Show</button></td>
+                        <td><button type="button"  data-toggle="modal" data-target="#edit-prd"  onclick="editPrd(${response.id})" class="btn btn-warning">EDIT</button></td>
+                        <td><button type="button"  data-id="${response.id}"  onclick="deletePrd(this)" class="btn btn-danger">DELETE</button></td>
+                        <td><button type="button"    onclick="showAnhPrd(${response.id})" class="btn btn-info">Anh</button></td>
+                    </>`
                     $('#list-prd').append(result);
                     $('#add-prd').modal('hide');
+                    $('#form-add')[0].reset();
                 },
                 error: function(jqXHR, textStatus, errorThrown) {}
             })
@@ -161,6 +161,34 @@ function showPrd(id) {
                 // $('h4#start').text(response.prd.start)
                 // $('h4#views').text(response.prd.views)
             $('img#prd-image').attr("src", response.prd.image);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {}
+    })
+}
+
+function editPrd(id) {
+    const API = API_CATEGORY + id
+    $('#form-edit').attr('data-id', id)
+    $.ajax({
+        type: 'get',
+        url: API_CATEGORY,
+        success: function(response) {
+            const result = response.map((cate) => {
+                return `<option value="${cate.id}">${cate.cate_name}</option> `
+            }).join("");
+            $("#edit-cate").html(result);
+        },
+        error: function(error) {}
+    })
+    $.ajax({
+        type: 'get',
+        url: `${API_PRODUCT}${id}`,
+        success: function(response) {
+            $('img#showImageEdit').attr("src", response.prd.image);
+            $('#edit-name').val(response.prd.name)
+            $('#edit-price').val(response.prd.price)
+            $('#edit-short_desc').val(response.prd.short_desc)
+            $('#edit-detail').val(response.prd.detail)
         },
         error: function(jqXHR, textStatus, errorThrown) {}
     })
