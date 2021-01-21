@@ -69,19 +69,32 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProduct $request, $id)
+    public function update(Request $request, $id)
     {
         //
         $model = Products::findOrFail($id);
         $model->fill($request->all());
         $model->save();
-        return $model;
-        foreach ($request->img_url as $img_url) {
-            Product_galleries::create([
-            'prd_id' => $model->id,
-            'img_url' => $img_url
-        ]);
+        $cate_id = $model->cate_id;
+        $cate = Category::find($cate_id);
+        if($request->img_url != null){
+            foreach ($request->img_url as $url) {
+                Product_galleries::create([
+            'product_id' => $model->id,
+            'img_url' => $url
+            ]);
         }
+            return  $result = [
+        'cate' => $cate,
+        'prd' => $model
+    ];
+        }else{
+            return  $result = [
+        'cate' => $cate,
+        'prd' => $model
+    ];
+        }
+
     }
 
     /**

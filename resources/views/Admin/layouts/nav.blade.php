@@ -61,20 +61,20 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('Admin.category') }}" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{ route('Admin.category') }}" class="nav-link ">
+
                   <p>Danh Muc</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('Admin.product') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="{{ route('Admin.product') }}" class="nav-link ">
+
                   <p>San pham</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                <a href="./index3.html" class="nav-link ">
+
                   <p>User</p>
                 </a>
               </li>

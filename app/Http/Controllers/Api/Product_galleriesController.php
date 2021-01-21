@@ -28,11 +28,17 @@ class Product_galleriesController extends Controller
     public function store(Request $request)
     {
         //
-        foreach ($request->img_url as $img_url) {
-			Product_galleries::create([
-			'prd_id' => $request->id,
-			'img_url' => $img_url
-		]);}
+        if($request->img_url != null){
+            foreach ($request->img_url as $url) {
+                Product_galleries::create([
+            'product_id' => $request->product_id,
+            'img_url' => $url
+            ]);
+        }
+            return 'done';
+        }else{
+            return 'loi ';
+        }
     }
 
     /**

@@ -40,7 +40,7 @@
     <textarea name="detail" class="form-control" id="edit-detail" rows="2"></textarea>
   </div>
 
-  <button type="submit" class="btn btn-outline-primary">ADD</button>
+  <button type="submit" class="btn btn-outline-primary">EDIT</button>
 </form >
       </div>
       <div class="modal-footer">
