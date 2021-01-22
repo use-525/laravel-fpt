@@ -114,7 +114,7 @@ class ProductsController extends Controller
         return $model;
     }
     public function searchProduct(Request $request){
-        $model = Products::where('name',"%$request->keywords%")->get();
+        $model = Products::where('name','like',"%$request->keywords%")->get();
         return $model;
     }
     public function sortProduct(Request $request){

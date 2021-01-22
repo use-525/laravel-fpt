@@ -125,7 +125,7 @@ function addPrd(callback) {
                     img_url: callback
                 },
                 success: function(response) {
-                    const result = ` << role="row" class="odd">
+                    const result = ` <tr role="row" class="odd">
                         <td class="dtr-control" tabindex="0">${response.id}</td>
                         <td id="prd_name-${response.id}" class="sorting_1">${response.name}</td>
                         <td><img   id="image-${response.id}" src="${response.image}" alt="" class="img-thumbnail" width="200" height="200"></td>
@@ -137,7 +137,7 @@ function addPrd(callback) {
                         <td><button type="button"  data-toggle="modal" data-target="#edit-prd"  onclick="btnEditPrd(${response.id})" class="btn btn-warning">EDIT</button></td>
                         <td><button type="button"  data-id="${response.id}"  onclick="deletePrd(this)" class="btn btn-danger">DELETE</button></td>
                         <td><button type="button"    onclick="showAnhPrd(${response.id})" class="btn btn-info">Anh</button></td>
-                    </>`
+                    <tr/>`
                     $('#list-prd').append(result);
                     $('#add-prd').modal('hide');
                     $('#form-add')[0].reset();
@@ -371,3 +371,75 @@ function addAnhMT(callback, id) {
         error: function(jqXHR, textStatus, errorThrown) {}
     })
 }
+
+$('#sort').change(function() {
+    let keysort = $(this).val();
+    $.ajax({
+        type: 'get',
+        data: { keysort: keysort },
+        url: 'http://localhost:8000/api/sortProduct/',
+        success: function(response) {
+            const result = response.map((prd) => {
+                    return ` <tr role="row" class="odd">
+                        <td class="dtr-control" tabindex="0">${prd.id}</td>
+                        <td id="prd_name-${prd.id}" class="sorting_1">${prd.name}</td>
+                        <td ><img  id="image-${prd.id}" src="${prd.image}" alt="" class="img-thumbnail" width="200" height="200"></td>
+                        <td id="cate_id-${prd.cate_id}">${oneCate(prd.cate_id)}</td>
+                        <td id="price-${prd.id}" >${prd.price}</td>
+                        <td id="star-${prd.id}">${prd.star} </td>
+                        <td id="views-${prd.id}">${prd.views}</td>
+                       <td><button type="button"  data-toggle="modal" data-target="#show-prd"  onclick="showPrd(${prd.id})" class="btn btn-info">Show</button></td>
+                        <td><button type="button"  data-toggle="modal" data-target="#edit-prd"  onclick="btnEditPrd(${prd.id})" class="btn btn-warning">EDIT</button></td>
+                        <td><button type="button"  data-id="${prd.id}"  onclick="deletePrd(this)" class="btn btn-danger">DELETE</button></td>
+                         <td><button type="button"  onclick="showAnhPrd(${prd.id})" class="btn btn-info">Anh</button></td>
+                    </tr>`;
+                })
+                .join("");
+            $('#list-prd').html(result);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {}
+    })
+})
+
+function searchPrd() {
+    $.ajax({
+        type: 'get',
+        data: {
+            keywords: $('#keywords').val(),
+        },
+        url: 'http://localhost:8000/api/searchProduct/',
+        success: function(response) {
+            const result = response.map((prd) => {
+                    return ` <tr role="row" class="odd">
+                        <td class="dtr-control" tabindex="0">${prd.id}</td>
+                        <td id="prd_name-${prd.id}" class="sorting_1">${prd.name}</td>
+                        <td ><img  id="image-${prd.id}" src="${prd.image}" alt="" class="img-thumbnail" width="200" height="200"></td>
+                        <td id="cate_id-${prd.cate_id}">${oneCate(prd.cate_id)}</td>
+                        <td id="price-${prd.id}" >${prd.price}</td>
+                        <td id="star-${prd.id}">${prd.star} </td>
+                        <td id="views-${prd.id}">${prd.views}</td>
+                        <td><button type="button"  data-toggle="modal" data-target="#show-prd"  onclick="showPrd(${prd.id})" class="btn btn-info">Show</button></td>
+                        <td><button type="button"  data-toggle="modal" data-target="#edit-prd"  onclick="btnEditPrd(${prd.id})" class="btn btn-warning">EDIT</button></td>
+                        <td><button type="button"  data-id="${prd.id}"  onclick="deletePrd(this)" class="btn btn-danger">DELETE</button></td>
+                        <td><button type="button"  onclick="showAnhPrd(${prd.id})" class="btn btn-info">Anh</button></td>
+                    </tr>`;
+                })
+                .join("");
+            $('#list-prd').html(result);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {}
+    })
+}
+
+function debounce(fn, delay) {
+    return (args) => {
+        clearTimeout(fn.id);
+        fn.id = setTimeout(() => {
+            fn.call(this, args);
+        }, delay);
+    };
+}
+const debounceAjax = debounce(searchPrd, 1000);
+$('#keywords').on('keyup', function(e) {
+    debounceAjax(e.target.value);
+});
