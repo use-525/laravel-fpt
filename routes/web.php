@@ -37,4 +37,7 @@ Route::get('/admin/category', function () {
 Route::get('/admin/product', function () {
     return view('Admin.product.index');
 })->name('Admin.product');
+Route::get('/admin/user', function () {
+    return view('Admin.user.index');
+})->name('Admin.user');
 

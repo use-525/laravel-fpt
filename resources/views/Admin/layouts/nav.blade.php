@@ -73,7 +73,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index3.html" class="nav-link ">
+                <a href="{{ route('Admin.user') }}" class="nav-link ">
 
                   <p>User</p>
                 </a>

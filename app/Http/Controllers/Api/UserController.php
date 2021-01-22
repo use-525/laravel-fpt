@@ -30,8 +30,8 @@ class UserController extends Controller
     {
         //
         $model = new User;
-        $model->password = Hash::make($request['password']);
         $model->fill($request->all());
+        $model->password = Hash::make($request->password);
         $model->save();
         return $model;
     }
@@ -45,10 +45,7 @@ class UserController extends Controller
     public function show($id)
     {
         //
-         $user = User::findOrFail($id);
-        return  $result = [
-        'user' => $user
-    ];
+        return $user = User::findOrFail($id);
     }
 
     /**
@@ -63,7 +60,7 @@ class UserController extends Controller
         //
         $model = User::findOrFail($id);
         $model->fill($request->all());
-            $model->save();
+        $model->save();
         return  $model;
     }
 
@@ -86,7 +83,7 @@ class UserController extends Controller
         $model = User::find($id);
         $model->password = Hash::make($request['password']);
         $model->save();
-       return  $result = [
+        return  $result = [
         'user' => $model
     ];
     }

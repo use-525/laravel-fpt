@@ -82,6 +82,7 @@ function editCate(id) {
         error: function(jqXHR, textStatus, errorThrown) {}
     })
 }
+
 $('#form-edit').validate({
     // validation form
     rules: {
