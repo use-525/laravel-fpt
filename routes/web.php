@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,16 +30,11 @@ use Inertia\Inertia;
 //     return Inertia::render('Dashboard');
 // })->name('dashboard');
 
-Route::get('/admin', function () {
-    return view('Admin.index');
-})->name('Admin.index');
-Route::get('/admin/category', function () {
-    return view('Admin.category.index');
-})->name('Admin.category');
-Route::get('/admin/product', function () {
-    return view('Admin.product.index');
-})->name('Admin.product');
-Route::get('/admin/user', function () {
-    return view('Admin.user.index');
-})->name('Admin.user');
-
+Route::get('/admin',[AdminController::class, 'Index'])->name('Admin.index');
+Route::get('/admin/category',[AdminController::class, 'Category'])->name('Admin.category');
+Route::get('/admin/product', [AdminController::class, 'Product'])->name('Admin.product');
+Route::get('/admin/user',[AdminController::class, 'User'])->name('Admin.user');
+Route::get('/', [HomeController::class, 'Home'] )->name('Home');
+Route::get('/shop', [HomeController::class, 'Shop'] )->name('Shop');
+Route::get('/cart', [HomeController::class, 'Cart'] )->name('Cart');
+Route::get('/product-details/{id}',  [HomeController::class, 'ProductDetail'])->name('ProductDetail');

@@ -22,3 +22,15 @@ mix.js('resources/js/app.js', 'public/js').vue()
 if (mix.inProduction()) {
     mix.version();
 }
+mix.styles([
+    'resources/css/animate.css',
+    'resources/css/bootstrap.min.css',
+    'resources/css/core-style.css',
+    'resources/css/font-awesome.min.css',
+    'resources/css/jquery-ui.min.css',
+    'resources/css/magnific-popup.css',
+    'resources/css/nouislider.css',
+    'resources/css/owl.carousel.css',
+    'resources/css/responsive.css',
+    'resources/css/themify-icons.css',
+], 'public/css/all.css');
