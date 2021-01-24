@@ -3,11 +3,12 @@
          <div class="modal fade" id="show" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
-                    <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+
 
                     <div class="modal-body">
+                         <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                         <div class="quickview_body">
                             <div class="container">
                                 <div class="row">
@@ -65,6 +66,20 @@
                 <div class="row">
                     <div class="col-12 col-md-4 col-lg-3">
                         <div class="shop_sidebar_area">
+                            <div class="widget catagory mb-50">
+                                <!--  Side Nav  -->
+                                <div class="nav-side-menu">
+                                    <h6 class="mb-0">Search</h6>
+                                    <form class="form-inline ml-3">
+                           <div class="input-group input-group-sm">
+                              <input class="form-control form-control-navbar" id="keywords" type="search" placeholder="Search" aria-label="Search">
+                              <div class="input-group-append">
+
+                              </div>
+                           </div>
+                        </form>
+                                </div>
+                            </div>
 
                             <div class="widget catagory mb-50">
                                 <!--  Side Nav  -->
@@ -131,7 +146,7 @@
 
                     <div class="col-12 col-md-8 col-lg-9">
                         <div class="shop_grid_product_area">
-                            <div class="row karl-new-arrivals" >
+                            <div class="row karl-new-arrivals"  id="list-prd">
 
                             </div>
                         </div>
@@ -144,5 +159,7 @@
         </section>
 
 @endsection
-
+@section('js')
+    <script src=" {{ asset('js/product.js') }}"></script>
+@endsection
 

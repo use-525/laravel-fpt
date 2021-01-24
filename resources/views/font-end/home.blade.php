@@ -1,15 +1,14 @@
-@extends('font-end.layout.main');
+@extends('font-end.layout.main')
 @section('content')
 
 
         <div class="modal fade" id="show" tabindex="-1" role="dialog" aria-labelledby="quickview" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
-                    <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-
                     <div class="modal-body">
+                        <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                         <div class="quickview_body">
                             <div class="container">
                                 <div class="row">

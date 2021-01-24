@@ -1,4 +1,4 @@
-@include('font-end/layout/links');
+@include('font-end/layout/links')
 <body>
     <div id="app">
   @include('font-end/layout/nav')
