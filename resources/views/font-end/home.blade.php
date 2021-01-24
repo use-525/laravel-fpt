@@ -79,7 +79,7 @@
             </div>
 
             <div class="container">
-                <div class="row karl-new-arrivals">
+                <div class="row karl-new-arrivals" id="list-prd">
 
 
                 </div>
@@ -90,6 +90,6 @@
 
 @endsection
 @section('js')
-  <script type="text/javascript"></script>
+    <script src=" {{ asset('js/product.js') }}"></script>
 @endsection
 

@@ -8,19 +8,7 @@
         </main>
     </div>
      @include('font-end/layout/footer')
-        <script>
-                $.ajaxSetup({
-    	headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-	});
-//                $(document).ready(function(){
-//   let productNumber = localStorage.getItem("cartNumbers");
-//          if (productNumber){
-//              $('.cart_quantity').text(productNumber);
-//          }
-//     });
-        </script>
+     @include('font-end.layout.script')
     @yield('js')
 </body>
 </html>
