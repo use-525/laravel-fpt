@@ -177,10 +177,54 @@ function listPrd(callback) {
                             <h4 class="product-price"  id="price-${prd.id}">${prd.price}</h4>
                         <a href="http://localhost:8000/product-details/${prd.id}" class=""> <p id="name-${prd.id}">${prd.name}</p></a>
                             <!-- Add to Cart -->
-                            <a href="#" class="add-to-cart-btn" onclick="addCart(this)" data-id-prd="${prd.id}" >ADD TO CART</a>
+                            <p href="#" class="add-to-cart-btn" onclick="addCart(${prd.id})" >ADD TO CART</p>
                         </div>
                     </div>`;
         })
         .join("");
     $('#list-prd').html(result);
+}
+
+function addCart(id) {
+    let productNumber = localStorage.getItem("cartNumbers");
+    productNumber = parseInt(productNumber);
+    if (productNumber) {
+        localStorage.setItem("cartNumbers", productNumber + 1);
+    } else {
+        localStorage.setItem("cartNumbers", 1);
+    }
+    $.ajax({
+        type: 'get',
+        url: 'http://localhost:8000/api/Cart/' + id,
+        success: function(response) {
+            let onePrd = [];
+            onePrd.push({ inCart: 2 });
+            let cartItems = localStorage.getItem("prdCart");
+            cartItems = JSON.parse(cartItems);
+            if (cartItems != null) {
+                if (cartItems[response.prd.name] == undefined) {
+                    cartItems = {
+                        ...cartItems,
+                        [response.prd.name]: response
+                    }
+                }
+                cartItems[response.prd.name].inCart += 1;
+            } else {
+                cartItems = {
+                    [response.prd.name]: response
+                }
+                cartItems[response.prd.name].inCart += 1;
+            }
+            localStorage.setItem('prdCart', JSON.stringify(cartItems));
+            let cartCost = localStorage.getItem('totalCost');
+            if (cartCost != null) {
+                cartCost = parseInt(cartCost);
+                response.prd.price = parseInt(response.prd.price);
+                localStorage.setItem('totalCost', (cartCost + response.prd.price));
+            } else {
+                localStorage.setItem('totalCost', response.prd.price);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {}
+    })
 }

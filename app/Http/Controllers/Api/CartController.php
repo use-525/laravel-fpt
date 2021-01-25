@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
-
-class AdminController extends Controller
+use App\Models\Products;
+use App\Models\Invoice;
+use App\Models\Invoice_detail;
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -39,6 +39,13 @@ class AdminController extends Controller
     public function show($id)
     {
         //
+        $prd = Products::find($id);
+        // return $prd;
+        return  $result = [
+        'inCart' =>0,
+        'prd' =>$prd
+
+    ];
     }
 
     /**
@@ -62,19 +69,5 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function Login( Request $request )
-    {
-
-        $login = [
-            'email' => $request->email,
-            'password' => $request->password,
-        ];
-        if( Auth::attempt($login)){
-            return $result = [
-                'login' => true,
-            ];
-        }
-
     }
 }

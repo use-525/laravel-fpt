@@ -45,7 +45,7 @@
   </div>
   <div class="form-group">
     <label for="">Phone </label>
-    <input type="text" class="form-control" id="phone" placeholder="Số điện thoại">
+    <input type="number" class="form-control" id="phone" placeholder="Số điện thoại">
   </div>
    <div class="form-group">
     <label for="">Email </label>
@@ -54,6 +54,10 @@
    <div class="form-group">
     <label for="">Địa Chỉ </label>
     <input type="text" class="form-control" id="address" placeholder="Địa Chỉ">
+  </div>
+    <div class="form-group">
+    <label for="">Payment </label>
+    <input type="number" class="form-control" id="payment_method" placeholder="Pay">
   </div>
 </form>
                     </div>
@@ -75,5 +79,7 @@
             </div>
         </div>
 @endsection
-
+@section('js')
+    <script src=" {{ asset('js/cart.js') }}"></script>
+@endsection
 

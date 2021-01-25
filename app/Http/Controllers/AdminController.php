@@ -24,4 +24,8 @@ class AdminController extends Controller
     public function User () {
     return view('Admin.user.index');
 }
+ public function formLogin()
+    {
+        return view('admin.login.login');
+    }
 }

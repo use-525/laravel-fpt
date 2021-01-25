@@ -19,4 +19,7 @@ class HomeController extends Controller
       public function ProductDetail(){
         return view('font-end.product-detail');
     }
+     public function Login(){
+        return view('font-end.login.login');
+    }
 }

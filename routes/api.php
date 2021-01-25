@@ -27,3 +27,5 @@ Route::get('searchProduct','App\Http\Controllers\Api\ProductsController@searchPr
 Route::get('sortProduct','App\Http\Controllers\Api\ProductsController@sortProduct')->name('Product.sortProduct');
 Route::post('changePassword/{id}', 'App\Http\Controllers\Api\UserController@changePassword')->name('User.changePassword');
 Route::post('Checkout', 'App\Http\Controllers\Api\ClientController@Checkout')->name('Client.Checkout');
+Route::post('loginAdmin', 'App\Http\Controllers\Api\AdminController@Login')->name('Admin.Login');
+Route::resource('Cart', 'App\Http\Controllers\Api\CartController');

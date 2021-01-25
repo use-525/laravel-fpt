@@ -10,6 +10,12 @@
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
     });
+               $(document).ready(function(){
+  let productNumber = localStorage.getItem("cartNumbers");
+         if (productNumber){
+             $('.cart_quantity').text(productNumber);
+         }
+    });
    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDfrmlaMhwMU3fGQNRYo5R_PHPv1WYscB0",
