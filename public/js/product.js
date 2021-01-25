@@ -6,26 +6,7 @@ window.onload = () => {
         type: "GET",
         url: API_PRODUCT,
         success: function(response) {
-            const result = response.map((prd) => {
-                    return `   <div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" id="prd-${prd.id}">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="${prd.image}" alt="">
-                            <div class="product-quicview">
-                          <a  data-target="#show" data-toggle="modal" onclick="showPrd(${prd.id})" class="btn-show"><i class="ti-plus "></i></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <h4 class="product-price"  id="price-${prd.id}">${prd.price}</h4>
-                        <a href="" class=""> <p id="name-${prd.id}">${prd.name}</p></a>
-                            <!-- Add to Cart -->
-                            <a href="#" class="add-to-cart-btn" onclick="addCart(this)" data-id-prd="${prd.id}" >ADD TO CART</a>
-                        </div>
-                    </div>`;
-                })
-                .join("");
-            $('#list-prd').html(result);
+            listPrd(response);
         }
     })
     $.ajax({
@@ -88,27 +69,7 @@ function listOneCate(cate_id) {
         },
         url: 'http://localhost:8000/api/sortProduct',
         success: function(response) {
-            $('.karl-new-arrivals').empty();
-            const result = response.map((prd) => {
-                    return `   <div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" id="prd-${prd.id}">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="${prd.image}" alt="">
-                            <div class="product-quicview">
-                          <a  data-target="#show" data-toggle="modal"  onclick="showPrd(${prd.id})" class="btn-show"><i class="ti-plus "></i></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <h4 class="product-price"  id="price-${prd.id}">${prd.price}</h4>
-                        <a href="" class=""> <p id="name-${prd.id}">${prd.name}</p></a>
-                            <!-- Add to Cart -->
-                            <a href="#" class="add-to-cart-btn" onclick="addCart(this)" data-id-prd="${prd.id}" >ADD TO CART</a>
-                        </div>
-                    </div>`;
-                })
-                .join("");
-            $('#list-prd').html(result);
+            listPrd(response);
         },
         error: function(jqXHR, textStatus, errorThrown) {
 
@@ -129,27 +90,7 @@ $('#sort-price').submit(function(e) {
         },
         url: 'http://localhost:8000/api/sortProduct/',
         success: function(response) {
-            $('#list-prd').empty();
-            console.log(response);
-            const result = response.map((prd) => {
-                return `<div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" id="prd-${prd.id}">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="${prd.image}" alt="">
-                            <div class="product-quicview">
-                          <a  data-target="#show" data-toggle="modal"  onclick="showPrd(${prd.id})" class="btn-show"><i class="ti-plus "></i></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <h4 class="product-price"  id="price-${prd.id}">${prd.price}</h4>
-                        <a href="" class=""> <p id="name-${prd.id}">${prd.name}</p></a>
-                            <!-- Add to Cart -->
-                            <a href="#" class="add-to-cart-btn" onclick="addCart(this)" data-id-prd="${prd.id}" >ADD TO CART</a>
-                        </div>
-                    </div>`
-            }).join("");
-            $('#list-prd').html(result);
+            listPrd(response);
         },
         error: function(jqXHR, textStatus, errorThrown) {
 
@@ -171,27 +112,7 @@ $('.sort-range').click(function(e) {
         },
         url: 'http://localhost:8000/api/sortProduct/',
         success: function(response) {
-            console.log(response);
-            $('#list-prd').empty();
-            const result = response.map((prd) => {
-                return `<div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" id="prd-${prd.id}">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="${prd.image}" alt="">
-                            <div class="product-quicview">
-                          <a  data-target="#show" data-toggle="modal"  onclick="showPrd(${prd.id})" class="btn-show"><i class="ti-plus "></i></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <h4 class="product-price"  id="price-${prd.id}">${prd.price}</h4>
-                        <a href="" class=""> <p id="name-${prd.id}">${prd.name}</p></a>
-                            <!-- Add to Cart -->
-                            <a href="#" class="add-to-cart-btn" onclick="addCart(this)" data-id-prd="${prd.id}" >ADD TO CART</a>
-                        </div>
-                    </div>`
-            }).join("");
-            $('#list-prd').html(result);
+            listPrd(response);
         },
         error: function(jqXHR, textStatus, errorThrown) {
 
@@ -205,27 +126,7 @@ $('#sort').change(function() {
         data: { keysort: keysort },
         url: 'http://localhost:8000/api/sortProduct/',
         success: function(response) {
-            console.log(response);
-            $('#list-prd').empty();
-            const result = response.map((prd) => {
-                return `<div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" id="prd-${prd.id}">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="${prd.image}" alt="">
-                            <div class="product-quicview">
-                          <a  data-target="#show" data-toggle="modal"  onclick="showPrd(${prd.id})" class="btn-show"><i class="ti-plus "></i></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <h4 class="product-price"  id="price-${prd.id}">${prd.price}</h4>
-                        <a href="" class=""> <p id="name-${prd.id}">${prd.name}</p></a>
-                            <!-- Add to Cart -->
-                            <a href="#" class="add-to-cart-btn" onclick="addCart(this)" data-id-prd="${prd.id}" >ADD TO CART</a>
-                        </div>
-                    </div>`
-            }).join("");
-            $('#list-prd').html(result);
+            listPrd(response);
         },
         error: function(jqXHR, textStatus, errorThrown) {
 
@@ -241,26 +142,7 @@ function searchPrd() {
         },
         url: 'http://localhost:8000/api/searchProduct/',
         success: function(response) {
-            const result = response.map((prd) => {
-                    return `<div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" id="prd-${prd.id}">
-                        <!-- Product Image -->
-                        <div class="product-img">
-                            <img src="${prd.image}" alt="">
-                            <div class="product-quicview">
-                          <a  data-target="#show" data-toggle="modal"  onclick="showPrd(${prd.id})" class="btn-show"><i class="ti-plus "></i></a>
-                            </div>
-                        </div>
-                        <!-- Product Description -->
-                        <div class="product-description">
-                            <h4 class="product-price"  id="price-${prd.id}">${prd.price}</h4>
-                        <a href="" class=""> <p id="name-${prd.id}">${prd.name}</p></a>
-                            <!-- Add to Cart -->
-                            <a href="#" class="add-to-cart-btn" onclick="addCart(this)" data-id-prd="${prd.id}" >ADD TO CART</a>
-                        </div>
-                    </div>`;
-                })
-                .join("");
-            $('#list-prd').html(result);
+            listPrd(response);
         },
         error: function(jqXHR, textStatus, errorThrown) {}
     })
@@ -274,7 +156,31 @@ function debounce(fn, delay) {
         }, delay);
     };
 }
-const debounceAjax = debounce(searchPrd, 1000);
+const debounceAjax = debounce(searchPrd, 500);
 $('#keywords').on('keyup', function(e) {
     debounceAjax(e.target.value);
 });
+
+function listPrd(callback) {
+    const result = callback.map((prd) => {
+            $('.karl-new-arrivals').empty();
+            return `   <div class="col-12 col-sm-6 col-md-4 single_gallery_item women wow fadeInUpBig" id="prd-${prd.id}">
+                        <!-- Product Image -->
+                        <div class="product-img">
+                            <img src="${prd.image}" alt="">
+                            <div class="product-quicview">
+                          <a  data-target="#show" data-toggle="modal" onclick="showPrd(${prd.id})" class="btn-show"><i class="ti-plus "></i></a>
+                            </div>
+                        </div>
+                        <!-- Product Description -->
+                        <div class="product-description">
+                            <h4 class="product-price"  id="price-${prd.id}">${prd.price}</h4>
+                        <a href="http://localhost:8000/product-details/${prd.id}" class=""> <p id="name-${prd.id}">${prd.name}</p></a>
+                            <!-- Add to Cart -->
+                            <a href="#" class="add-to-cart-btn" onclick="addCart(this)" data-id-prd="${prd.id}" >ADD TO CART</a>
+                        </div>
+                    </div>`;
+        })
+        .join("");
+    $('#list-prd').html(result);
+}
